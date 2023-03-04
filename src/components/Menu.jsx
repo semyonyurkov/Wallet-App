@@ -1,7 +1,14 @@
-import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Menu = () => {
-    return <div>Menu</div>;
+    return (
+        <nav>
+            <NavLink to="." end>
+                Главная страница
+            </NavLink>
+            <NavLink to="operations">Операции</NavLink>
+        </nav>
+    );
 };
 
 export default Menu;

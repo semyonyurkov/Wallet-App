@@ -1,5 +1,13 @@
+import { Outlet } from 'react-router-dom';
+import Menu from '../components/Menu';
+
 const MainLayout = () => {
-    return <div></div>;
+    return (
+        <>
+            <Menu />
+            <Outlet />
+        </>
+    );
 };
 
 export default MainLayout;
