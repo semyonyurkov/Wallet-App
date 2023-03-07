@@ -4,18 +4,13 @@ import MainPage from './components/MainPage';
 import Operations from './components/Operations';
 import './App.css';
 
-const balance = 0;
-
 function App() {
     return (
         <BrowserRouter>
             <div className="App">
                 <Routes>
                     <Route path="/" element={<MainLayout />}>
-                        <Route
-                            index={true}
-                            element={<MainPage balance={balance} />}
-                        />
+                        <Route index={true} element={<MainPage />} />
                         <Route path="operations" element={<Operations />} />
                         <Route />
                     </Route>

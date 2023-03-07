@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ReplenishBalance = ({
+const ChangingBalance = ({
     isVisible = false,
     title,
     content,
@@ -26,9 +26,6 @@ const ReplenishBalance = ({
             <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
                 <div className="modal-header">
                     <h3 className="modal-title">{title}</h3>
-                    <span className="modal-close" onClick={onClose}>
-                        &times;
-                    </span>
                 </div>
                 <div className="modal-body">
                     <div className="modal-content">{content}</div>
@@ -39,4 +36,4 @@ const ReplenishBalance = ({
     );
 };
 
-export default ReplenishBalance;
+export default ChangingBalance;
