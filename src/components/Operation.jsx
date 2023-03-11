@@ -4,6 +4,9 @@ const Operation = () => {
             <div>Операция 1</div>
             <div>Операция 2</div>
             <div>Операция 3</div>
+            <div>Операция 1</div>
+            <div>Операция 2</div>
+            <div>Операция 3</div>
         </>
     );
 };
