@@ -7,11 +7,17 @@ import './App.css';
 
 function App() {
     const [operations, setOperations] = useState([]);
+    const [balance, setBalance] = useState(0);
 
-    function operationsSetting() {
-        setOperations(...operations);
+    const addOperations = (reason, balance) => {
+        console.log(operations);
+        setOperations([...operations, { reason: reason, balance: balance }]);
+    };
+
+    function changeBalance(sum) {
+        return setBalance(Number(balance) + Number(sum));
     }
-    console.log(operations);
+
     return (
         <BrowserRouter>
             <div className="App">
@@ -21,7 +27,9 @@ function App() {
                             index={true}
                             element={
                                 <MainPage
-                                    operationsSetting={operationsSetting}
+                                    changeBalance={changeBalance}
+                                    addOperations={addOperations}
+                                    balance={balance}
                                 />
                             }
                         />

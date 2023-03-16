@@ -1,18 +1,62 @@
 import Modal from './Modal';
-import React, { useState } from 'react';
 
 function MainPage(props) {
-    const operationsSetting = props;
-    const [modal, setModal] = useState(false);
+    const { addOperations, changeBalance, balance } = props;
+    const arrOfReplName = [
+        {
+            value: 'receiving a salary',
+            text: 'Получение зарплаты',
+        },
+        {
+            value: 'transfer from friend',
+            text: 'Перевод от друга',
+        },
+        {
+            value: 'cashback',
+            text: 'Кэшбек',
+        },
+        {
+            value: 'bonus accrual',
+            text: 'Начисление бонусов',
+        },
+    ];
+    const arrOfSpendName = [
+        {
+            value: 'shop purchase',
+            text: 'Покупка в магазине',
+        },
+        {
+            value: 'payment of the penalty',
+            text: 'Оплата штрафа',
+        },
+        {
+            value: 'payment for utilities',
+            text: 'Оплата коммуналок',
+        },
+        {
+            value: 'transfer to a friend',
+            text: 'Перевод другу',
+        },
+    ];
+
     return (
         <>
-            <div>Общий баланс: 0 рублей</div>
+            <div>Общий баланс: {balance} рублей</div>
             <div>
-                <button onClick={() => setModal(true)}>Пополнить</button>
                 <Modal
-                    isVisible={modal}
-                    setModal={setModal}
-                    operationsSetting={operationsSetting}
+                    addOperations={addOperations}
+                    textButton={'Пополнить'}
+                    options={arrOfReplName}
+                    changeBalance={changeBalance}
+                    isNegativOperation={false}
+                />
+                <Modal
+                    addOperations={addOperations}
+                    textButton={'Потратить'}
+                    options={arrOfSpendName}
+                    changeBalance={changeBalance}
+                    isNegativOperation={true}
+                    balance={balance}
                 />
             </div>
         </>
