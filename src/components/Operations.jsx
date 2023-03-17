@@ -1,13 +1,20 @@
 import Operation from './Operation';
 
-const Operations = () => {
+function Operations(props) {
+    const { operations } = props;
     return (
         <>
             <div>История операций</div>
-            <div>Выпадающий список: все\переводы\пополнения</div>
-            <Operation />
+            <div>
+                <select>
+                    <option value="all">Все</option>
+                    <option value="replenish">Получение</option>
+                    <option value="spending">Траты</option>
+                </select>
+            </div>
+            <Operation operations={operations} />
         </>
     );
-};
+}
 
 export default Operations;

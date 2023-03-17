@@ -13,7 +13,7 @@ function Modal(props) {
     } = props;
 
     const [summ, setSumm] = useState(0);
-    const [reason, setReason] = useState('receiving a salary');
+    const [reason, setReason] = useState(options[0].value);
     const [visible, setVisible] = useState(false);
 
     function reasonSetting(event) {
@@ -27,20 +27,41 @@ function Modal(props) {
     function addingBalance(e) {
         e.preventDefault();
         if (isNegativOperation) {
-            if (summ > balance) {
-                alert('Недостаточно средств');
-            } else {
-                changeBalance(summ * -1);
-            }
+            changeBalance(summ * -1);
         } else {
             changeBalance(summ);
         }
         setVisible(false);
     }
+
+    function isPossibleOperation() {
+        if (isNegativOperation && summ > balance) {
+            alert('Недостаточно средств');
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function isSummMoreThenZero() {
+        if (summ !== '0' && summ !== '' && summ !== 0) {
+            return true;
+        } else {
+            alert('Введите сумму');
+            return false;
+        }
+    }
+
     function onSubmit(e) {
+        if (isPossibleOperation() && isSummMoreThenZero()) {
+            e.preventDefault();
+            addingBalance(e);
+            addOperations(reason, summ);
+            setVisible(false);
+            return;
+        }
         e.preventDefault();
-        addOperations(reason, summ);
-        setVisible(false);
+        return;
     }
 
     const list = options.map((option, index) => {
@@ -63,7 +84,7 @@ function Modal(props) {
                         <div className="modal-body">
                             <div className="modal-content">
                                 <>
-                                    <form onSubmit={onSubmit && addingBalance}>
+                                    <form onSubmit={onSubmit}>
                                         <select
                                             value={reason}
                                             onChange={reasonSetting}

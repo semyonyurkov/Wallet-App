@@ -1,44 +1,10 @@
 import Modal from './Modal';
+import { NameList1, NameList2 } from '../const/NameList';
 
 function MainPage(props) {
     const { addOperations, changeBalance, balance } = props;
-    const arrOfReplName = [
-        {
-            value: 'receiving a salary',
-            text: 'Получение зарплаты',
-        },
-        {
-            value: 'transfer from friend',
-            text: 'Перевод от друга',
-        },
-        {
-            value: 'cashback',
-            text: 'Кэшбек',
-        },
-        {
-            value: 'bonus accrual',
-            text: 'Начисление бонусов',
-        },
-    ];
-    const arrOfSpendName = [
-        {
-            value: 'shop purchase',
-            text: 'Покупка в магазине',
-        },
-        {
-            value: 'payment of the penalty',
-            text: 'Оплата штрафа',
-        },
-        {
-            value: 'payment for utilities',
-            text: 'Оплата коммуналок',
-        },
-        {
-            value: 'transfer to a friend',
-            text: 'Перевод другу',
-        },
-    ];
-
+    const arrOfReplName = NameList1();
+    const arrOfSpendName = NameList2();
     return (
         <>
             <div>Общий баланс: {balance} рублей</div>
@@ -55,7 +21,7 @@ function MainPage(props) {
                     textButton={'Потратить'}
                     options={arrOfSpendName}
                     changeBalance={changeBalance}
-                    isNegativOperation={true}
+                    isNegativOperation
                     balance={balance}
                 />
             </div>

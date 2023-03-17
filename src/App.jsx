@@ -33,7 +33,10 @@ function App() {
                                 />
                             }
                         />
-                        <Route path="operations" element={<Operations />} />
+                        <Route
+                            path="operations"
+                            element={<Operations operations={operations} />}
+                        />
                         <Route />
                     </Route>
                 </Routes>
