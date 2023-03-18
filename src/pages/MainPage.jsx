@@ -1,4 +1,4 @@
-import Modal from './Modal';
+import Modal from '../components/Modal';
 import { NameList1, NameList2 } from '../const/NameList';
 
 function MainPage(props) {

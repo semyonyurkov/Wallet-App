@@ -42,4 +42,22 @@ function NameList2() {
     return arrOfSpendName;
 }
 
-export { NameList1, NameList2 };
+function NameOption() {
+    const optionsList = [
+        {
+            value: 'all',
+            text: 'Все',
+        },
+        {
+            value: 'replenish',
+            text: 'Получение',
+        },
+        {
+            value: 'spending',
+            text: 'Траты',
+        },
+    ];
+    return optionsList;
+}
+
+export { NameList1, NameList2, NameOption };

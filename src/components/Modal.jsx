@@ -56,7 +56,7 @@ function Modal(props) {
         if (isPossibleOperation() && isSummMoreThenZero()) {
             e.preventDefault();
             addingBalance(e);
-            addOperations(reason, summ);
+            addOperations(reason, summ, isNegativOperation);
             setVisible(false);
             return;
         }

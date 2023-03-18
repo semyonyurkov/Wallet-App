@@ -1,17 +1,24 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
 import MainLayout from './layouts/MainLayout';
-import MainPage from './components/MainPage';
-import Operations from './components/Operations';
+import MainPage from './pages/MainPage';
+import OperationsPage from './pages/OperationsPage';
 import './App.css';
 
 function App() {
     const [operations, setOperations] = useState([]);
     const [balance, setBalance] = useState(0);
 
-    const addOperations = (reason, balance) => {
+    const addOperations = (reason, balance, isNegativOperation) => {
         console.log(operations);
-        setOperations([...operations, { reason: reason, balance: balance }]);
+        setOperations([
+            ...operations,
+            {
+                reason: reason,
+                balance: balance,
+                isNegativOperation: isNegativOperation,
+            },
+        ]);
     };
 
     function changeBalance(sum) {
@@ -35,7 +42,7 @@ function App() {
                         />
                         <Route
                             path="operations"
-                            element={<Operations operations={operations} />}
+                            element={<OperationsPage operations={operations} />}
                         />
                         <Route />
                     </Route>
