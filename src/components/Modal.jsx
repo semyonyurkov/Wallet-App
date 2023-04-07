@@ -1,20 +1,17 @@
 import React from 'react';
 import { useState } from 'react';
+import { changeBalance } from '../features/Balance/balance-slice';
+import { useDispatch } from 'react-redux';
+import { addOperation } from '../features/Operations/operations-slice';
+import { useSelector } from 'react-redux';
 
 function Modal(props) {
-    const {
-        onClose,
-        addOperations,
-        textButton,
-        options,
-        changeBalance,
-        isNegativOperation,
-        balance,
-    } = props;
-
+    const { onClose, textButton, options, isNegativOperation } = props;
+    const dispatch = useDispatch();
     const [summ, setSumm] = useState(0);
     const [reason, setReason] = useState(options[0].value);
     const [visible, setVisible] = useState(false);
+    const balance = useSelector((state) => state.balance);
 
     function reasonSetting(event) {
         setReason(event.target.value);
@@ -27,9 +24,9 @@ function Modal(props) {
     function addingBalance(e) {
         e.preventDefault();
         if (isNegativOperation) {
-            changeBalance(summ * -1);
+            dispatch(changeBalance(Number(summ * -1)));
         } else {
-            changeBalance(summ);
+            dispatch(changeBalance(Number(summ)));
         }
         setVisible(false);
     }
@@ -56,7 +53,7 @@ function Modal(props) {
         if (isPossibleOperation() && isSummMoreThenZero()) {
             e.preventDefault();
             addingBalance(e);
-            addOperations(reason, summ, isNegativOperation);
+            dispatch(addOperation(reason, summ, isNegativOperation));
             setVisible(false);
             return;
         }

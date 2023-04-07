@@ -1,6 +1,8 @@
-function Operation(props) {
-    const { operations, option } = props;
+import { useSelector } from 'react-redux';
 
+function Operation(props) {
+    const { option } = props;
+    const operations = useSelector((state) => state.operations);
     const filtredList = operations.filter((operation) => {
         if (option === 'all') {
             return operation;
@@ -10,7 +12,7 @@ function Operation(props) {
             return operation.isNegativOperation === true;
         }
     });
-
+    // console.log(filtredList);
     const list = filtredList.map((operation, index) => {
         return (
             <div

@@ -1,28 +1,26 @@
 import Modal from '../components/Modal';
-import { NameList1, NameList2 } from '../const/NameList';
+import { useSelector } from 'react-redux';
+import { selectBalance } from '../features/Balance/balance-slice';
+import { arrOfReplName, arrOfSpendName } from '../const/NameList';
 
-function MainPage(props) {
-    const { addOperations, changeBalance, balance } = props;
-    const arrOfReplName = NameList1();
-    const arrOfSpendName = NameList2();
+function MainPage() {
+    const currentBalance = useSelector((state) => state.balance);
+    const balance = useSelector((state) =>
+        selectBalance(state, currentBalance)
+    );
     return (
         <>
             <div>Общий баланс: {balance} рублей</div>
             <div>
                 <Modal
-                    addOperations={addOperations}
                     textButton={'Пополнить'}
                     options={arrOfReplName}
-                    changeBalance={changeBalance}
                     isNegativOperation={false}
                 />
                 <Modal
-                    addOperations={addOperations}
                     textButton={'Потратить'}
                     options={arrOfSpendName}
-                    changeBalance={changeBalance}
                     isNegativOperation
-                    balance={balance}
                 />
             </div>
         </>
