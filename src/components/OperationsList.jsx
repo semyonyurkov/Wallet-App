@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { Divider, List } from 'antd';
 
 function Operation(props) {
     const { option } = props;
@@ -12,16 +13,36 @@ function Operation(props) {
             return operation.isNegativOperation === true;
         }
     });
-    // console.log(filtredList);
     const list = filtredList.map((operation, index) => {
         return (
-            <div
-                key={index}
-            >{`${operation.reason}: ${operation.balance} рублей`}</div>
+            <div className="operations-container">
+                <div
+                    className="operations-reason"
+                    key={index}
+                >{`${operation.reason}`}</div>
+                <div className="operations-summ">{`${operation.balance} рублей`}</div>
+            </div>
         );
     });
 
-    return <>{list}</>;
+    return (
+        <>
+            <Divider orientation="left"></Divider>
+            <div className="info-container">
+                <div className="info-type">Тип операции</div>
+                <div className="info-summ">Сумма</div>
+            </div>
+            <List
+                className="list"
+                size="large"
+                bordered
+                dataSource={list}
+                renderItem={(item) => (
+                    <List.Item className="operations-list">{item}</List.Item>
+                )}
+            />
+        </>
+    );
 }
 
 export default Operation;

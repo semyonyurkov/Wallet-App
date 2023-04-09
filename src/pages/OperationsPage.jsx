@@ -1,27 +1,35 @@
 import { useState } from 'react';
 import OperationsList from '../components/OperationsList';
 import { optionsList } from '../const/NameList';
+import { Select, Space } from 'antd';
 
 function OperationsPage() {
     const [option, setOption] = useState(optionsList[0].value);
-    const list = optionsList.map((option, index) => {
-        return (
-            <option key={index} value={option.value}>
-                {option.text}
-            </option>
-        );
+
+    const list = optionsList.map((option) => {
+        return {
+            value: option.value,
+            label: option.label,
+        };
     });
 
-    function changingOption(event) {
-        setOption(event.target.value);
+    function changingOption(value) {
+        setOption(`${value}`);
     }
     return (
         <>
             <div>История операций</div>
             <div>
-                <select value={option} onChange={changingOption}>
-                    {list}
-                </select>
+                <Space>
+                    <Select
+                        style={{
+                            width: 150,
+                        }}
+                        value={option}
+                        onChange={changingOption}
+                        options={list}
+                    ></Select>
+                </Space>
             </div>
             <OperationsList option={option} />
         </>

@@ -4,6 +4,7 @@ import { changeBalance } from '../features/Balance/balance-slice';
 import { useDispatch } from 'react-redux';
 import { addOperation } from '../features/Operations/operations-slice';
 import { useSelector } from 'react-redux';
+import { Button, Select, Space, InputNumber } from 'antd';
 
 function Modal(props) {
     const { onClose, textButton, options, isNegativOperation } = props;
@@ -13,12 +14,12 @@ function Modal(props) {
     const [visible, setVisible] = useState(false);
     const balance = useSelector((state) => state.balance);
 
-    function reasonSetting(event) {
-        setReason(event.target.value);
+    function reasonSetting(value) {
+        setReason(`${value}`);
     }
 
-    function balanceSetting(event) {
-        setSumm(event.target.value);
+    function balanceSetting(value) {
+        setSumm(value);
     }
 
     function addingBalance(e) {
@@ -61,17 +62,25 @@ function Modal(props) {
         return;
     }
 
-    const list = options.map((option, index) => {
-        return (
-            <option key={index} value={option.value}>
-                {option.text}
-            </option>
-        );
+    const list = options.map((option) => {
+        return {
+            value: option.value,
+            label: option.label,
+        };
     });
 
     return (
         <div>
-            <button onClick={() => setVisible(true)}>{textButton}</button>
+            <Button
+                style={{
+                    width: 250,
+                    height: 80,
+                    fontSize: 22,
+                }}
+                onClick={() => setVisible(true)}
+            >
+                {textButton}
+            </Button>
             {!visible ? null : (
                 <div className="modal" onClick={onClose}>
                     <div className="modal-dialog">
@@ -82,29 +91,40 @@ function Modal(props) {
                             <div className="modal-content">
                                 <>
                                     <form onSubmit={onSubmit}>
-                                        <select
+                                        <Select
+                                            className="modal-select"
                                             value={reason}
                                             onChange={reasonSetting}
-                                        >
-                                            {list}
-                                        </select>
+                                            options={list}
+                                        ></Select>
                                         <div>
-                                            <input
+                                            <InputNumber
+                                                className="modal-input"
+                                                min={0}
                                                 placeholder="Введите сумму"
                                                 type="number"
                                                 value={summ}
                                                 onChange={balanceSetting}
-                                            ></input>
+                                            ></InputNumber>
                                         </div>
-                                        <button type="submit">
-                                            Подтвердить
-                                        </button>
-                                        <button
-                                            type="button"
-                                            onClick={() => setVisible(false)}
-                                        >
-                                            Закрыть
-                                        </button>
+                                        <Space>
+                                            <Button
+                                                className="modal-button-submit"
+                                                type="primary"
+                                                htmlType="submit"
+                                            >
+                                                Подтвердить
+                                            </Button>
+                                            <Button
+                                                className="modal-button-close"
+                                                type="primary"
+                                                onClick={() =>
+                                                    setVisible(false)
+                                                }
+                                            >
+                                                Закрыть
+                                            </Button>
+                                        </Space>
                                     </form>
                                 </>
                             </div>

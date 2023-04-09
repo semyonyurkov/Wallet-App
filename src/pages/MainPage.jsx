@@ -9,9 +9,9 @@ function MainPage() {
         selectBalance(state, currentBalance)
     );
     return (
-        <>
-            <div>Общий баланс: {balance} рублей</div>
-            <div>
+        <div>
+            <div className="mainpage-text">Общий баланс: {balance} рублей</div>
+            <div className="mainpage-buttons">
                 <Modal
                     textButton={'Пополнить'}
                     options={arrOfReplName}
@@ -23,7 +23,7 @@ function MainPage() {
                     isNegativOperation
                 />
             </div>
-        </>
+        </div>
     );
 }
 
